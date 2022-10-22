@@ -1,10 +1,12 @@
+import {BsSearch} from 'react-icons/bs'
+
 import './index.css'
 
 const FiltersGroup = props => {
   const {
     categoryData,
     ratingData,
-    searchInputToFilterProducts,
+    // searchInputToFilterProducts,
     filtersChangeHandler,
   } = props
 
@@ -31,13 +33,17 @@ const FiltersGroup = props => {
 
   return (
     <div className="filters-group-container">
-      <input
-        type="search"
-        className="product-search-container"
-        placeholder="Search"
-        onKeyDown={onSearchInputChange}
-        // value={searchInputToFilterProducts}
-      />
+      <div className="product-search-container">
+        <input
+          type="search"
+          className="product-search-input"
+          placeholder="Search"
+          onKeyDown={onSearchInputChange}
+          // value={searchInputToFilterProducts}
+        />
+
+        <BsSearch className="search-icon" />
+      </div>
 
       <div className="single-filter-container">
         <p className="filter-header">Category</p>
