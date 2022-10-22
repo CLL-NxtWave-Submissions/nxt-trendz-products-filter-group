@@ -154,20 +154,34 @@ class AllProductsSection extends Component {
     const {productsList, activeOptionId} = this.state
 
     // TODO: Add No Products View
-    return (
-      <div className="all-products-container">
-        <ProductsHeader
-          activeOptionId={activeOptionId}
-          sortbyOptions={sortbyOptions}
-          changeSortby={this.changeSortby}
-        />
-        <ul className="products-list">
-          {productsList.map(product => (
-            <ProductCard productData={product} key={product.id} />
-          ))}
-        </ul>
-      </div>
-    )
+    let finalProductsListUI = null
+
+    if (productsList.length === 0) {
+      finalProductsListUI = this.renderErrorView({
+        errorImageUrl:
+          'https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-no-products-view.png',
+        errorImageAltAttributeValue: 'no products',
+        errorContentHeader: 'Np Products Found',
+        errorDescription: 'We could not find any products. Try other filters.',
+      })
+    } else {
+      finalProductsListUI = (
+        <div className="all-products-container">
+          <ProductsHeader
+            activeOptionId={activeOptionId}
+            sortbyOptions={sortbyOptions}
+            changeSortby={this.changeSortby}
+          />
+          <ul className="products-list">
+            {productsList.map(product => (
+              <ProductCard productData={product} key={product.id} />
+            ))}
+          </ul>
+        </div>
+      )
+    }
+
+    return finalProductsListUI
   }
 
   renderLoader = () => (
@@ -177,16 +191,18 @@ class AllProductsSection extends Component {
   )
 
   // TODO: Add failure view
-  renderFailureView = () => (
-    <div className="products-failure-view-container">
+  renderErrorView = errorViewData => (
+    <div className="products-error-view-container">
       <img
-        className="products-failure-img"
-        src="https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-products-error-view.png"
-        alt="products failure"
+        className="products-error-img"
+        src={errorViewData.errorImageUrl}
+        alt={errorViewData.errorImageAltAttributeValue}
       />
-      <h1 className="products-failure-header">Oops! Something Went Wrong</h1>
-      <p className="products-failure-description">
-        We are having some trouble processing your request. Please try again.
+      <h1 className="products-error-header">
+        {errorViewData.errorContentHeader}
+      </h1>
+      <p className="products-error-description">
+        {errorViewData.errorDescription}
       </p>
     </div>
   )
@@ -205,7 +221,14 @@ class AllProductsSection extends Component {
       finalProductsUI = this.renderProductsList()
     } else {
       // currentProductsResponseStatus === productsAPIResponseStatus.success
-      finalProductsUI = this.renderFailureView()
+      finalProductsUI = this.renderErrorView({
+        errorImageUrl:
+          'https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-products-error-view.png',
+        errorImageAltAttributeValue: 'products failure',
+        errorContentHeader: 'Oops! Something Went Wrong',
+        errorDescription:
+          'We are having some trouble processing your request. Please try again.',
+      })
     }
 
     return finalProductsUI
