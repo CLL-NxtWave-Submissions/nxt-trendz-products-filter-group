@@ -191,6 +191,26 @@ class AllProductsSection extends Component {
     </div>
   )
 
+  renderProductsUIBasedOnAPIResponseStatus = currentProductsResponseStatus => {
+    let finalProductsUI = null
+
+    if (
+      currentProductsResponseStatus === productsAPIResponseStatus.initial ||
+      currentProductsResponseStatus === productsAPIResponseStatus.loading
+    ) {
+      finalProductsUI = this.renderLoader()
+    } else if (
+      currentProductsResponseStatus === productsAPIResponseStatus.success
+    ) {
+      finalProductsUI = this.renderProductsList()
+    } else {
+      // currentProductsResponseStatus === productsAPIResponseStatus.success
+      finalProductsUI = this.renderFailureView()
+    }
+
+    return finalProductsUI
+  }
+
   render() {
     const {productsResponseStatus} = this.state
 
@@ -201,12 +221,7 @@ class AllProductsSection extends Component {
           ratingData={ratingsList}
           filtersChangeHandler={this.onProductFilterChange}
         />
-        {productsResponseStatus === productsAPIResponseStatus.initial ||
-        productsResponseStatus === productsAPIResponseStatus.loading
-          ? this.renderLoader()
-          : productsResponseStatus === productsAPIResponseStatus.success
-          ? this.renderProductsList()
-          : this.renderFailureView()}
+        {this.renderProductsUIBasedOnAPIResponseStatus(productsResponseStatus)}
         {/* TODO: Update the below element */}
         {/* {isLoading ? this.renderLoader() : this.renderProductsList()} */}
       </div>
