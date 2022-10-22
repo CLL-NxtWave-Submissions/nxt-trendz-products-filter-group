@@ -140,6 +140,16 @@ class AllProductsSection extends Component {
     this.setState({activeOptionId}, this.getProducts)
   }
 
+  onProductFilterChange = newFilters =>
+    this.setState(prevAllProductsSectionState => {
+      const {filters} = prevAllProductsSectionState
+      const updatedFilters = {...filters, ...newFilters}
+
+      return {
+        filters: updatedFilters,
+      }
+    })
+
   renderProductsList = () => {
     const {productsList, activeOptionId} = this.state
 
