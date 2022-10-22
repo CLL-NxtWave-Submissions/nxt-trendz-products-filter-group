@@ -101,3 +101,7 @@
 .clear-filters-button {
   font-family: 'Roboto';
 }
+
+.filter-option-text {
+  margin: 0;
+}

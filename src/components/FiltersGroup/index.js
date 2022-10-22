@@ -65,7 +65,7 @@ const FiltersGroup = props => {
                   })
                 }
               >
-                <p>{categoryDataItem.name}</p>
+                <p className="filter-option-text">{categoryDataItem.name}</p>
               </button>
             </li>
           ))}
