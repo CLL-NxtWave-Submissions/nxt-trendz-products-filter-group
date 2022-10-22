@@ -49,7 +49,7 @@
   padding-left: 0;
 }
 
-.products-failure-view-container {
+.products-error-view-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
