@@ -15,6 +15,13 @@ const FiltersGroup = props => {
     filtersChangeHandler(changedSearchInputFilterObject)
   }
 
+  const onClearFilters = () =>
+    filtersChangeHandler({
+      inputSearchString: '',
+      selectedCategoryId: '',
+      selectedRatingId: '',
+    })
+
   return (
     <div className="filters-group-container">
       <input
@@ -70,6 +77,14 @@ const FiltersGroup = props => {
           ))}
         </ul>
       </div>
+
+      <button
+        type="button"
+        className="clear-filters-button"
+        onClick={onClearFilters}
+      >
+        Clear Filters
+      </button>
     </div>
   )
 }
