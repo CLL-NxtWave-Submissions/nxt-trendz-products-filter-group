@@ -1,7 +1,12 @@
 import './index.css'
 
 const FiltersGroup = props => {
-  const {categoryData, ratingData, filtersChangeHandler} = props
+  const {
+    categoryData,
+    ratingData,
+    searchInputToFilterProducts,
+    filtersChangeHandler,
+  } = props
 
   // Have to use inputSearchString, selectedCategoryId, selectedRatingId
   // as object keys with appropriate values, when calling filtersChangeHandler
@@ -29,6 +34,7 @@ const FiltersGroup = props => {
         className="product-search-container"
         placeholder="Search"
         onChange={onSearchInputChange}
+        value={searchInputToFilterProducts}
       />
 
       <div className="single-filter-container">

@@ -235,13 +235,14 @@ class AllProductsSection extends Component {
   }
 
   render() {
-    const {productsResponseStatus} = this.state
+    const {productsResponseStatus, filters} = this.state
 
     return (
       <div className="all-products-section">
         <FiltersGroup
           categoryData={categoryOptions}
           ratingData={ratingsList}
+          searchInputToFilterProducts={filters.inputSearchString}
           filtersChangeHandler={this.onProductFilterChange}
         />
         {this.renderProductsUIBasedOnAPIResponseStatus(productsResponseStatus)}

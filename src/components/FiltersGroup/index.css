@@ -12,13 +12,13 @@
 }
 
 .product-search-container {
-  background-color: #64748b;
+  background-color: #f1f5f9;
   border-radius: 0.6rem;
   padding: 0.5rem;
   width: 100%;
   outline: none;
   border: none;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
 }
 
 .single-filter-container {
@@ -33,7 +33,7 @@
   color: #0f172a;
   font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 .filter-options-container {
@@ -53,11 +53,15 @@
   color: #475569;
   font-size: 1rem;
   border: none;
+  padding-left: 0;
+  display: flex;
+  align-items: center;
 }
 
 .filter-option-button-img {
   height: 1.5rem;
-  width: 8rem;
+  width: 10rem;
+  margin-right: 1rem;
 }
 
 .clear-filters-button {
