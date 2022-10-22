@@ -111,9 +111,15 @@ class AllProductsSection extends Component {
 
     let currentProductsResponseStatus = null
     let updatedData = null
+    let response = null
 
-    const response = await fetch(apiUrl, options)
-    if (response.ok) {
+    try {
+      response = await fetch(apiUrl, options)
+    } catch (fetchException) {
+      currentProductsResponseStatus = productsAPIResponseStatus.failure
+    }
+
+    if (response !== null && response.ok) {
       const fetchedData = await response.json()
       updatedData = fetchedData.products.map(product => ({
         title: product.title,
@@ -220,7 +226,7 @@ class AllProductsSection extends Component {
     ) {
       finalProductsUI = this.renderProductsList()
     } else {
-      // currentProductsResponseStatus === productsAPIResponseStatus.success
+      // currentProductsResponseStatus === productsAPIResponseStatus.failure
       finalProductsUI = this.renderErrorView({
         errorImageUrl:
           'https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-products-error-view.png',
