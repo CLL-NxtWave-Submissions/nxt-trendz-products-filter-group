@@ -177,16 +177,38 @@ class AllProductsSection extends Component {
   )
 
   // TODO: Add failure view
+  renderFailureView = () => (
+    <div className="products-failure-view-container">
+      <img
+        className="products-failure-img"
+        src="https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-products-error-view.png"
+        alt="products failure"
+      />
+      <h1 className="products-failure-header">Oops! Something Went Wrong</h1>
+      <p className="products-failure-description">
+        We are having some trouble processing your request. Please try again.
+      </p>
+    </div>
+  )
 
   render() {
-    const {isLoading} = this.state
+    const {productsResponseStatus} = this.state
 
     return (
       <div className="all-products-section">
+        <FiltersGroup
+          categoryData={categoryOptions}
+          ratingData={ratingsList}
+          filtersChangeHandler={this.onProductFilterChange}
+        />
+        {productsResponseStatus === productsAPIResponseStatus.initial ||
+        productsResponseStatus === productsAPIResponseStatus.loading
+          ? this.renderLoader()
+          : productsResponseStatus === productsAPIResponseStatus.success
+          ? this.renderProductsList()
+          : this.renderFailureView()}
         {/* TODO: Update the below element */}
-        <FiltersGroup />
-
-        {isLoading ? this.renderLoader() : this.renderProductsList()}
+        {/* {isLoading ? this.renderLoader() : this.renderProductsList()} */}
       </div>
     )
   }
