@@ -52,7 +52,7 @@ const FiltersGroup = props => {
       </div>
 
       <div className="single-filter-container">
-        <p className="filter-header">Category</p>
+        <h1 className="filter-header">Category</h1>
         <ul className="filter-options-container">
           {categoryData.map(categoryDataItem => (
             <li key={categoryDataItem.categoryId} className="filter-option">
@@ -65,7 +65,7 @@ const FiltersGroup = props => {
                   })
                 }
               >
-                {categoryDataItem.name}
+                <p>{categoryDataItem.name}</p>
               </button>
             </li>
           ))}
@@ -73,7 +73,7 @@ const FiltersGroup = props => {
       </div>
 
       <div className="single-filter-container">
-        <p className="filter-header">Rating</p>
+        <h1 className="filter-header">Rating</h1>
         <ul className="filter-options-container">
           {ratingData.map(ratingDataItem => (
             <li key={ratingDataItem.ratingId} className="filter-option">
