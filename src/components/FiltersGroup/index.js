@@ -12,12 +12,14 @@ const FiltersGroup = props => {
   // as object keys with appropriate values, when calling filtersChangeHandler
   // method with changed filter data object as input.
   const onSearchInputChange = searchInputChangeEvent => {
-    const updatedSearchString = searchInputChangeEvent.target.value
-    const changedSearchInputFilterObject = {
-      inputSearchString: updatedSearchString,
-    }
+    if (searchInputChangeEvent.code === 'Enter') {
+      const updatedSearchString = searchInputChangeEvent.target.value
+      const changedSearchInputFilterObject = {
+        inputSearchString: updatedSearchString,
+      }
 
-    filtersChangeHandler(changedSearchInputFilterObject)
+      filtersChangeHandler(changedSearchInputFilterObject)
+    }
   }
 
   const onClearFilters = () =>
@@ -33,8 +35,8 @@ const FiltersGroup = props => {
         type="search"
         className="product-search-container"
         placeholder="Search"
-        onChange={onSearchInputChange}
-        value={searchInputToFilterProducts}
+        onKeyDown={onSearchInputChange}
+        // value={searchInputToFilterProducts}
       />
 
       <div className="single-filter-container">
