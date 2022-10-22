@@ -161,7 +161,7 @@ class AllProductsSection extends Component {
         errorImageUrl:
           'https://assets.ccbp.in/frontend/react-js/nxt-trendz/nxt-trendz-no-products-view.png',
         errorImageAltAttributeValue: 'no products',
-        errorContentHeader: 'Np Products Found',
+        errorContentHeader: 'No Products Found',
         errorDescription: 'We could not find any products. Try other filters.',
       })
     } else {
