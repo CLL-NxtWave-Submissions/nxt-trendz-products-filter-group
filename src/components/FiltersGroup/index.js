@@ -24,12 +24,18 @@ const FiltersGroup = props => {
     }
   }
 
-  const onClearFilters = () =>
+  const onClearFilters = () => {
+    const searchInputElement = document.querySelector(
+      'div.product-search-container input',
+    )
+    searchInputElement.value = ''
+
     filtersChangeHandler({
       inputSearchString: '',
       selectedCategoryId: '',
       selectedRatingId: '',
     })
+  }
 
   return (
     <div className="filters-group-container">
