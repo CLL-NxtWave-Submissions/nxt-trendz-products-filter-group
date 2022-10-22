@@ -148,7 +148,7 @@ class AllProductsSection extends Component {
       return {
         filters: updatedFilters,
       }
-    })
+    }, this.getProducts)
 
   renderProductsList = () => {
     const {productsList, activeOptionId} = this.state
