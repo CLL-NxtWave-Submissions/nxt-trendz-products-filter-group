@@ -65,11 +65,25 @@ const ratingsList = [
   },
 ]
 
+const productsAPIResponseStatus = {
+  initial: 'UNINITIATED',
+  loading: 'LOADING',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+}
+
+const initialFilterSetting = {
+  inputSearchString: '',
+  selectedCategoryId: '',
+  selectedRatingId: '',
+}
+
 class AllProductsSection extends Component {
   state = {
     productsList: [],
-    isLoading: false,
+    productsResponseStatus: productsAPIResponseStatus.initial,
     activeOptionId: sortbyOptions[0].optionId,
+    filters: initialFilterSetting,
   }
 
   componentDidMount() {
@@ -78,24 +92,30 @@ class AllProductsSection extends Component {
 
   getProducts = async () => {
     this.setState({
-      isLoading: true,
+      productsResponseStatus: productsAPIResponseStatus.loading,
     })
     const jwtToken = Cookies.get('jwt_token')
 
     // TODO: Update the code to get products with filters applied
+    const {filters} = this.state
+    const {inputSearchString, selectedCategoryId, selectedRatingId} = filters
 
     const {activeOptionId} = this.state
-    const apiUrl = `https://apis.ccbp.in/products?sort_by=${activeOptionId}`
+    const apiUrl = `https://apis.ccbp.in/products?sort_by=${activeOptionId}&title_search=${inputSearchString}&category=${selectedCategoryId}&rating=${selectedRatingId}`
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
       },
       method: 'GET',
     }
+
+    let currentProductsResponseStatus = null
+    let updatedData = null
+
     const response = await fetch(apiUrl, options)
     if (response.ok) {
       const fetchedData = await response.json()
-      const updatedData = fetchedData.products.map(product => ({
+      updatedData = fetchedData.products.map(product => ({
         title: product.title,
         brand: product.brand,
         price: product.price,
@@ -103,11 +123,17 @@ class AllProductsSection extends Component {
         imageUrl: product.image_url,
         rating: product.rating,
       }))
-      this.setState({
-        productsList: updatedData,
-        isLoading: false,
-      })
+
+      currentProductsResponseStatus = productsAPIResponseStatus.success
+    } else {
+      // failed response
+      currentProductsResponseStatus = productsAPIResponseStatus.failure
     }
+
+    this.setState({
+      productsList: updatedData,
+      productsResponseStatus: currentProductsResponseStatus,
+    })
   }
 
   changeSortby = activeOptionId => {
