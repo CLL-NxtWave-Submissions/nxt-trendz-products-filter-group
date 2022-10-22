@@ -35,7 +35,7 @@ const FiltersGroup = props => {
         <p className="filter-header">Category</p>
         <ul className="filter-options-container">
           {categoryData.map(categoryDataItem => (
-            <li className="filter-option">
+            <li key={categoryDataItem.categoryId} className="filter-option">
               <button
                 type="button"
                 className="filter-option-button"
@@ -56,7 +56,7 @@ const FiltersGroup = props => {
         <p className="filter-header">Rating</p>
         <ul className="filter-options-container">
           {ratingData.map(ratingDataItem => (
-            <li className="filter-option">
+            <li key={ratingDataItem.ratingId} className="filter-option">
               <button
                 type="button"
                 className="filter-option-button"
