@@ -60,19 +60,19 @@
   width: 90%;
 }
 
-.products-failure-img {
+.products-error-img {
   width: 90%;
   margin-bottom: 1rem;
 }
 
-.products-failure-header {
+.products-error-header {
   color: #12022f;
   font-size: 2rem;
   font-weight: 550;
   margin-bottom: 2rem;
 }
 
-.products-failure-description {
+.products-error-description {
   color: #475569;
   font-size: 0.9rem;
   font-weight: 550;
